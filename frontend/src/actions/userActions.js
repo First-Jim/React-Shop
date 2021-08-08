@@ -1,7 +1,7 @@
 /*
  * @Author: liujiaming
  * @Date: 2021-08-08 16:12:59
- * @LastEditTime: 2021-08-08 16:21:16
+ * @LastEditTime: 2021-08-08 19:40:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /React-Mobile-Shop/frontend/src/actions/userActions.js
@@ -35,10 +35,10 @@ export const login = (email, password) => async (dispatch) => {
     );
     console.log("data: ", data);
 
-    dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
+    dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
     localStorage.setItem("userInfo", JSON.stringify(data));
-  } catch (err) {
+  } catch (error) {
     dispatch({
       type: USER_LOGIN_FALL,
       payload:
@@ -47,4 +47,9 @@ export const login = (email, password) => async (dispatch) => {
           : error.message,
     });
   }
+};
+
+export const logout = () => (dispatch) => {
+  localStorage.removeItem("userInfo");
+  dispatch({ type: USER_LOGOUT });
 };
