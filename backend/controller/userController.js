@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-08-07 23:12:27
- * @LastEditTime: 2021-08-08 00:10:10
+ * @LastEditTime: 2021-08-08 14:03:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /React-Mobile-Shop/backend/controller/userController.js
@@ -32,5 +32,25 @@ const authUser = asyncHandler(async (req, res) => {
     throw new Error("邮箱或密码无效");
   }
 });
+/**
+ * @description: 获取登录成功的用户详情
+ * @router GET/api/users/profile
+ * @access 私密
+ */
 
-export { authUser };
+const getUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  if (user) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
+  } else {
+    res.status(404);
+    throw new Error("用户不存在");
+  }
+});
+
+export { authUser, getUserProfile };

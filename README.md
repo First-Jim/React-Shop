@@ -1,4 +1,13 @@
-项目名称：米修在线-手机商城 介绍：MERN 全栈项目
+<!--
+ * @Author: liujiaming
+ * @Date: 2021-08-05 20:39:53
+ * @LastEditTime: 2021-08-08 10:50:24
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /React-Mobile-Shop/README.md
+-->
+
+项目名称：MY 手机商城 介绍：MERN 全栈项目
 用法
 ECMAScript Modules
 项目的后端使用 ECMAScript 模块。确保至少具有 Node v14.6 +, 另外，在导入文件（不是包）时，请确保在末尾添加.js，否则会出现“找不到模块”错误
