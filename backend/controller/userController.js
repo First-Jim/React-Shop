@@ -1,7 +1,7 @@
 /*
- * @Author: your name
+ * @Author: liujiaming
  * @Date: 2021-08-07 23:12:27
- * @LastEditTime: 2021-08-08 14:03:53
+ * @LastEditTime: 2021-08-08 15:08:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /React-Mobile-Shop/backend/controller/userController.js
@@ -10,6 +10,36 @@
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
+
+/**
+ * @description: 用户注册
+ * @router POST/api/users
+ * @access 公开
+ */
+
+const registerUser = asyncHandler(async (req, res) => {
+  const { name, email, password } = req.body;
+  const userExists = await User.findOne({ email });
+  //用户已经注册
+  if (userExists) {
+    res.status(400);
+    throw new Error("用户已存在");
+  }
+  //第一次注册
+  const user = await User.create({ name, email, password });
+  if (user) {
+    res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(400);
+    throw new Error("这是一个无效的信息");
+  }
+});
 /**
  * @description: 用户身份验证 & 获取Token
  * @router POST/api/users/login
@@ -53,4 +83,4 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, getUserProfile };
+export { authUser, getUserProfile, registerUser };
