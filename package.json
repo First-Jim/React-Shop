@@ -1,0 +1,43 @@
+{
+  "name": "react-mobile-shop",
+  "version": "1.0.0",
+  "description": "MERN mobile-shop",
+  "main": "server.js",
+  "type": "module",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "express-async-handler": "^1.1.4",
+    "husky": "^7.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.5",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.1",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0"
+  },
+  "scripts": {
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "data:import": "node backend/seeder",
+    "data:destory": "node backend/seeder -d"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/First-Jim/React-Shop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/First-Jim/React-Shop/issues"
+  },
+  "homepage": "https://github.com/First-Jim/React-Shop#readme"
+}
