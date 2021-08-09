@@ -1,7 +1,7 @@
 /*
  * @Author: liujiaming
  * @Date: 2021-08-07 23:12:27
- * @LastEditTime: 2021-08-08 15:08:02
+ * @LastEditTime: 2021-08-09 17:20:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /React-Mobile-Shop/backend/controller/userController.js
@@ -82,5 +82,36 @@ const getUserProfile = asyncHandler(async (req, res) => {
     throw new Error("用户不存在");
   }
 });
+/**
+ * @description: 更新用户资料
+ * @router PUT/api/users/profile
+ * @access 私密
+ */
 
-export { authUser, getUserProfile, registerUser };
+const updateUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  // 获取更新后的资料
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+    const updateUser = await user.save();
+    console.log("updateUser: ", updateUser);
+
+    // 返回更新后 的信息
+    res.json({
+      _id: updateUser._id,
+      name: updateUser.name,
+      email: updateUser.email,
+      isAdmin: updateUser.isAdmin,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(404);
+    throw new Error("用户不存在");
+  }
+});
+
+export { authUser, getUserProfile, registerUser, updateUserProfile };
