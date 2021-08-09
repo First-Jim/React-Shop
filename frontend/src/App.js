@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-08-05 20:39:53
- * @LastEditTime: 2021-08-08 17:07:37
+ * @LastEditTime: 2021-08-09 16:35:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /React-Mobile-Shop/frontend/src/App.js
@@ -16,6 +16,7 @@ import HomeScreen from "./pages/HomeScreen";
 import ProductScreen from "./pages/ProductScreen";
 import CartScreen from "./pages/CartScreen";
 import LoginScreen from "./pages/LoginScreen";
+import RegisterScreen from "./pages/RegisterScreen";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <main className="py-3">
         <Container>
           <Route path="/login" component={LoginScreen}></Route>
+          <Route path="/register" component={RegisterScreen}></Route>
           <Route path="/" component={HomeScreen} exact></Route>
           <Route path="/products/:id" component={ProductScreen}></Route>
           <Route path="/cart/:id?" component={CartScreen}></Route>

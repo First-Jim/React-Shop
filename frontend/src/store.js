@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-08-07 10:45:03
- * @LastEditTime: 2021-08-08 16:23:19
+ * @LastEditTime: 2021-08-09 16:32:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /React-Mobile-Shop/frontend/src/store.js
@@ -16,13 +16,14 @@ import {
 
 import { cartReducer } from "./reducers/cartReducers";
 
-import { userLoginReducer } from "./reducers/userReducers";
+import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
 
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productListDetailReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
+  userRegister: userRegisterReducer,
 });
 
 // 获取本地存储的购物车信息

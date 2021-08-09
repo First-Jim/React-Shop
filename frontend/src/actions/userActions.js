@@ -1,7 +1,7 @@
 /*
  * @Author: liujiaming
  * @Date: 2021-08-08 16:12:59
- * @LastEditTime: 2021-08-08 19:40:13
+ * @LastEditTime: 2021-08-09 16:41:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /React-Mobile-Shop/frontend/src/actions/userActions.js
@@ -12,6 +12,9 @@ import {
   USER_LOGIN_FALL,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_REQUEST,
+  USER_REGISTER_FALL,
+  USER_REGISTER_SUCCESS,
+  USER_REGISTER_REQUEST,
 } from "../constants/userContants";
 
 /**
@@ -33,7 +36,7 @@ export const login = (email, password) => async (dispatch) => {
       { email, password },
       config
     );
-    console.log("data: ", data);
+    console.log("login: ", data);
 
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
@@ -41,6 +44,42 @@ export const login = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FALL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+/**
+ * @description: 用户注册Action
+ * @param {*}
+ * @return {*}
+ */
+export const register = (name, email, password) => async (dispatch) => {
+  try {
+    dispatch({ type: USER_REGISTER_REQUEST });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.post(
+      "/api/users",
+      { name, email, password },
+      config
+    );
+    console.log("register: ", data);
+
+    dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
+    dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
+
+    localStorage.setItem("userInfo", JSON.stringify(data));
+  } catch (error) {
+    dispatch({
+      type: USER_REGISTER_FALL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
